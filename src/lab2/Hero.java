@@ -3,37 +3,41 @@ package lab2;
 import java.util.Random;
 
 public class Hero 
-{
-	String name;
-	String hClass;
-	int level;
-	int experience;
-	static final int MAX_LEVEL = 10;
-	static final int[] LEVELS = {5, 10, 15, 20, 30, 40, 50, 75, 100, 150};
+{	
 	Random rand = new Random();
-	
+	private String name;
+    private String hClass;
+    private int level;
+    private int experience;
+	public static final int MAX_LEVEL = 10;
+	public static final int[] LEVELS = {5, 10, 15, 20, 30, 40, 50, 75, 100, 150};
+
 	
 	public Hero(String name)
 	{
 		this.name = name;
-		hClass = "";
-		level = 1;
-		experience = 0;
+		this.hClass = "";
+		this.level = 1;
+		this.experience = 0;
 	}
 	
 	public String getName()
 	{
-		return name;
+		return this.name;
 	}
 	public String gethClass()
 	{
-		return hClass;
+		return this.hClass;
 	}
 	public int getLevel()
 	{
-		return level;
+		return this.level;
 	}
 	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 	public void sethClass(String hClass)
 	{
 		this.hClass = hClass;
@@ -44,23 +48,26 @@ public class Hero
 	}
 	public void setRandomLevel()
 	{
-		level = rand.nextInt(10)+1;
+		this.level = rand.nextInt(10)+1;
 	}
 	
-	public void gainExperience(int experience)
+	public void gainExperience(int experience) 
+    {
+        this.experience += experience;
+        while (this.experience >= LEVELS[this.level - 1]) 
+        {
+            this.level++;
+            this.experience = 0;
+        }
+    }
+	
+	public String toString() 
 	{
-		this.experience = experience;
-		while (level != MAX_LEVEL)
-		{
-			for (int i = 0; i<LEVELS.length && this.experience > LEVELS[i]; i++)  
-			{
-				this.experience -= LEVELS[i];
-				level++;
-			}
-		}
+        return this.name + " the " + this.hClass + " is level " + this.level + " with " + this.experience + " experience";
 	}
-	
 }
+
+
 
 
 
