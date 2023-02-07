@@ -51,13 +51,13 @@ public class Hero
 		this.level = rand.nextInt(10)+1;
 	}
 	
-	public void gainExperience(int experience) 
+	public void gainExperience(int experience)  
     {
         this.experience += experience;
         while (this.experience >= LEVELS[this.level - 1]) 
         {
+            this.experience -= LEVELS[this.level-1];
             this.level++;
-            this.experience = 0;
         }
     }
 	
